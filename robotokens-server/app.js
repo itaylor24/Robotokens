@@ -32,10 +32,10 @@ io.on('connection', (socket)=>{
         socket.emit('joined_room', roomNo); 
         console.log(data); 
         if(activePlayers%2===1){
-            activeRooms[roomNo] = {status:'waiting', players: [socket.id] }; 
+            activeRooms[roomNo] = {status:'waiting for players', players: [socket.id] }; 
         }else 
         if(activePlayers%2===0){
-            activeRooms[roomNo].status = 'started'; 
+            activeRooms[roomNo].status = 'started countdown'; 
             activeRooms[roomNo].players.push(socket.id);
 
             
@@ -44,10 +44,10 @@ io.on('connection', (socket)=>{
             setTimeout(()=>{
                 io.sockets.in(roomNo).emit('start_game'); 
                 console.log("hi"); 
+                activeRooms[roomNo].status = 'started'; 
             }, 10000)
             
             activeRooms[roomNo].time = time; 
-
             
             io.sockets.in(roomNo).emit('waiting', {time: 10000-(Date.now()-activeRooms[roomNo].time), betAmounts:{1:0, 2:0}}); 
             
@@ -63,25 +63,54 @@ io.on('connection', (socket)=>{
              
         }); 
 
+        socket.on("disconnecting", () => {
+            activePlayers-= 1; 
+
+            const index = activeRooms[roomNo].players.indexOf(socket.id);
+            if (index > -1) { // only splice array when item is found
+                activeRooms.splice(index, 1); // 2nd parameter means remove one item only
+            }
+
+            console.log(socket.rooms); // the Set contains at least the socket ID
+            if(activePlayers % 2 === 0){
+                delete activeRooms[roomNo]; 
+                console.log(`${roomNo} removed`); 
+            }
+
+        });
+
+        socket.on('game_over', (data)=>{
+            //data = {winner: 1 or 2, room: roomNo} emitted by winning player
+            let winnerId = data.winner - 1;  
+            let loserId = winnerId === 1? 2 : 1; 
+            let thisRoom = ''+data.room 
+            history.push({winner: activeRooms[thisRoom].players[winnerId], loser:activeRooms[thisRoom].players[loserId]}); 
+            console.log(history); 
+            io.in(thisRoom).disconnectSockets(); 
+            activePlayers -= 2; 
+            delete activeRooms[thisRoom]; 
+        })
+    
+        socket.on('disconnect', (socket)=>{
+            console.log('User Disconnected')
+        }); 
+
     })
 
-    socket.on('game_over', (data)=>{
-        //data = {winner: 1 or 2, room: roomNo} emitted by winning player
-        let winnerId = data.winner - 1;  
-        let loserId = winnerId === 1? 2 : 1; 
-        let thisRoom = ''+data.room 
-        history.push({winner: activeRooms[thisRoom].players[winnerId], loser:activeRooms[thisRoom].players[loserId]}); 
-        console.log(history); 
-        io.in(thisRoom).disconnectSockets(); 
-        activePlayers -= 2; 
-        delete activeRooms[thisRoom]; 
+    socket.on('query_battles', ()=>{
+        let roomsArray = Object.keys(activeRooms).reverse(); 
+
+        roomsArray = roomsArray.filter((item)=>{
+            return item.status === "started countdown"; 
+        })
+
+        socket.emit('send_battles', roomsArray)
     })
+
 
 
 }); 
 
-io.on('disconnect', (socket)=>{
-    console.log('User Disconnected')
-}); 
+
 
 server.listen(3001, ()=>console.log("Server Running")); 
