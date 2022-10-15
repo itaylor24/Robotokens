@@ -6,7 +6,7 @@ const Script = (props) =>{
     const {script} = props; 
 
     return (<ScriptContainer>
-            Script
+            Script In Order of Excution
         {script.map((item, index)=>{
             return(<div key={index}>
                 {item}
