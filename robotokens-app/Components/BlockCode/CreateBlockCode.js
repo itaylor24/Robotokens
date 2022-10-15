@@ -17,11 +17,18 @@ const CreateBlockCode = (props) =>{
         setShowModal(!showModal); 
     }
 
+    const handleAddBlock = (newBlock) =>{
+        let newBlockList = [...blocklist]; 
+        newBlockList.push(newBlock); 
+        updateBlockList(newBlockList); 
+    }
+
+
     return (<div>
 
         <BlockList blocklist = {blocklist}/>
         <CreateBlockButton click={handleClick}/>
-        <BlockSelectorModal showModal ={showModal} setShowModal={setShowModal} />
+        <BlockSelectorModal showModal ={showModal} setShowModal={setShowModal} handleAddBlock = {handleAddBlock} />
         <Script script = {script}/>
 
     </div>)

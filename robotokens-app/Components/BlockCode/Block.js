@@ -39,6 +39,7 @@ const BlockContainer = styled.div`
     padding-top: 10px; 
     padding-bottom: 10px; 
     border-radius: 10px; 
+    margin-bottom: 10px; 
    
 
     ${props => props.name === 'run' && css  `

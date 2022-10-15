@@ -6,7 +6,6 @@ const BlockList = (props) =>{
 
     const {blocklist} = props; 
 
-
     return (<BlockListContainer>
         {blocklist.map((item,index)=>{
             return <Block block = {item} key={`${index}`+item.name} />

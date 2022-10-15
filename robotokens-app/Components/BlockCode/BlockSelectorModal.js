@@ -5,10 +5,21 @@ import { MdClose } from 'react-icons/md';
 
 // import {Translator, Translate} from 'react-auto-translate';
  
-export const BlockSelectorModal = ({ showModal, setShowModal}) => {
+export const BlockSelectorModal = ({ showModal, setShowModal, handleAddBlock}) => {
  
-const modalRef = useRef();
- 
+    const modalRef = useRef();
+    const [instruction, setInstruction] = useState(null); 
+    const [option, setOption] = useState(null); 
+
+    const handleChangeInstruction = (evt) =>{
+        
+        setInstruction(evt.target.value); 
+    }
+
+    const handleChangeOption = (evt) =>{
+        setOption(evt.target.value); 
+    }
+
   const animation = useSpring({
     config: {
       duration: 550
@@ -31,6 +42,8 @@ const modalRef = useRef();
     [setShowModal, showModal]
   );
  
+
+  
   useEffect(
     () => {
       document.addEventListener('keydown', keyPress);
@@ -47,22 +60,38 @@ return (
             <ModalWrapper showModal={showModal}>
               <ModalContent>
                 <MainTitle> Select Block </MainTitle>
-                <OptionsMenu>
-                  <option>--Select Block Type--</option>
+                <OptionsMenu onChange = {handleChangeOption}>
+                  <option>Select Block</option>
                   <option>RUN</option>
                   <option>WALK</option>
                   <option>TURN</option>
                   <option>THROW</option>
+                  <option>WAIT</option>
                 </OptionsMenu>
 
                 <MainTitle>
                     Input Instruction 
                 </MainTitle>
 
-                <InputInstruction type="number">
+                <InputInstruction type="number" onChange={handleChangeInstruction}>
 
                 </InputInstruction>
+                <SaveButton onClick = {(evt) => {
 
+                    if(option && instruction){
+                        handleAddBlock({name: ''+option.toLowerCase(), instruction: '' +instruction}); 
+                        setShowModal(prev=>!prev);  
+                        setOption(null); 
+                        setInstruction(null); 
+                    }else{
+                        alert("All Fields Required"); 
+                    }
+                    
+                      
+                        
+                    }}>
+                    Save
+                </SaveButton>
               </ModalContent>
               <CloseModalButton
                 aria-label='Close modal'
@@ -91,6 +120,19 @@ justify-content: center;
 align-items: center;
 z-index:10;
 `;
+
+const SaveButton = styled.button`
+    background-color: green; 
+    border: none; 
+    border-radius: 10px; 
+    color: white; 
+    margin-bottom: 20px; 
+    width: fit-content; 
+    font-size: 20px; 
+    padding: 10px; 
+    padding-right: 15px; 
+    padding-left: 15px; 
+`
 
 const ModalWrapper = styled.div`
 width: 100%;
