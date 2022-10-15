@@ -4,6 +4,8 @@ import BlockList from './BlockList';
 import CreateBlockButton from './CreateBlockButton';
 import Script from './Script';
 
+import styled from 'styled-components';
+
 const CreateBlockCode = (props) =>{
 
     const [script, updateScript] = useState(['run (30 spaces)', 'walk (40 spaces)']); 
@@ -17,5 +19,8 @@ const CreateBlockCode = (props) =>{
 
     </div>)
 }
+
+
+
 
 export default CreateBlockCode

@@ -7,7 +7,7 @@ const Block = (props) => {
 
     return (<BlockContainer name = {block.name}>
         <BlockTitle name = {block.name}>
-            {block.name}
+            {block.name.toUpperCase()}
         </BlockTitle>
         <BlockInstruction>
             {block.instruction}
@@ -20,10 +20,12 @@ export default Block
 const BlockTitle = styled.div`
     font-weight: bold; 
     color: white; 
+    font-size: 20px;  
    
 `
 const BlockInstruction = styled.div`
     color: white; 
+    font-size: 15px; 
 `
 
 const BlockContainer = styled.div`
