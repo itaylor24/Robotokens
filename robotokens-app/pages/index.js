@@ -7,40 +7,51 @@ import styled from 'styled-components'
 export default function Home() {
   return (
     <>
-        <Black>
-      <Container>
-        <ImgContainer>
-          <Image
-              src = "/robot4.gif"
-              alt="robot"
-              layout="responsive"
-              width={500}
-              height={300}
-          />
-        </ImgContainer>
+      <Black>
+        <Container>
+          <ImgContainer>
+            <Image
+                src = "/robot4.gif"
+                alt="robot"
+                layout="responsive"
+                width={500}
+                height={300}
+            />
+          </ImgContainer>
+          <TextHolder>
+            <Text2>
+              Welcome to RoboTokens
+            </Text2>
+            <Text3>
+              Gotta Code 'em All.
+            </Text3>
+          </TextHolder>
 
-        <Text2>
-          Welcome to RoboTokens
-        </Text2>
-
-      </Container>
-    </Black>
+        </Container>
+      </Black>
         <Section2 />
     </>
   )
 }
 
+const TextHolder = styled.div`
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: 100%;
+`
+
+const Text3 = styled.div`
+  margin: 1.5vw;
+  font-size: 1.4vw;
+`
+
 const Text2 = styled.div`
   opacity: 1;
   color: white;
   font-family: Impact;
-  font-size: 100px;
-  text-align: center;
-  
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  font-size: 6vw;
 `
 
 const ImgContainer = styled.div`
