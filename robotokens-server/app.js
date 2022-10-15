@@ -37,14 +37,32 @@ io.on('connection', (socket)=>{
         if(activePlayers%2===0){
             activeRooms[roomNo].status = 'started'; 
             activeRooms[roomNo].players.push(socket.id);
+
+            
+
+            let time = Date.now(); 
+            setTimeout(()=>{
+                io.sockets.in(roomNo).emit('start_game'); 
+                console.log("hi"); 
+            }, 10000)
+            
+            activeRooms[roomNo].time = time; 
+
+            
+            io.sockets.in(roomNo).emit('waiting', {time: 10000-(Date.now()-activeRooms[roomNo].time), betAmounts:{1:0, 2:0}}); 
+            
             
         }
+
         console.log(activeRooms); 
-        setTimeout(()=>{
-            socket.emit('start_game')
-        }, 10000)
-        socket.emit('waiting', {})
-        socket.on(''); 
+
+        socket.on('recieved', ()=>{
+            setTimeout(()=>{
+                io.sockets.in(roomNo).emit('waiting', {time: 10000-(Date.now()-activeRooms[roomNo].time), betAmounts:{1:0, 2:0}});
+            }, 1000); 
+             
+        }); 
+
     })
 
     socket.on('game_over', (data)=>{
@@ -59,7 +77,6 @@ io.on('connection', (socket)=>{
         delete activeRooms[thisRoom]; 
     })
 
-    socket.on('')
 
 }); 
 
