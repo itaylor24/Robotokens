@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import robot from '../public/robot2.gif'
+import robot from '../public/robot4.gif'
 import mit from '../public/mit.jpg'
 import styled from 'styled-components'
 
@@ -17,7 +17,7 @@ export default function Home() {
           <Image
               // src="https://www.mit.edu/files/images/201807/15656704711_00457bd2c9_b_1.jpg"
               // src = "https://example.com/test"
-              src = "/robot2.gif"
+              src = "/robot4.gif"
               alt="robot"
               layout="responsive"
               width={500}
@@ -53,7 +53,7 @@ const Text2 = styled.div`
 `
 
 const ImgContainer = styled.div`
-  backgroundImage: /robot2.gif;
+  backgroundImage: /robot4.gif;
   opacity: 0.8;
 `
 
