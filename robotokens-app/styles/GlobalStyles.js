@@ -10,6 +10,7 @@ const GlobalStyles = createGlobalStyle`
 body { 
     font-family: "Ubuntu", sans-serif;
     overflow-x: hidden;
+    margin: 0px;
 }
 
 a{
