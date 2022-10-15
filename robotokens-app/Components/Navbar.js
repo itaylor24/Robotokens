@@ -14,7 +14,7 @@ const Navbar = () => {
     <Header>
       <Title href="./">RoboTokens</Title>
       <Btn1 href = "./wager">Invest</Btn1>
-      <Btn2 href="./wager">Battle</Btn2>
+      <Btn2 href="./findmatch">Battle</Btn2>
       <Btn3 href="./create">Create</Btn3>
     </Header>
   )
