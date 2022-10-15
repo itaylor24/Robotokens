@@ -6,10 +6,7 @@ const app = express();
 
 const server = http.createServer(app)
 
-
-
 app.use(cors); 
-
 
 const io = new Server(server, {
     cors: {
@@ -17,6 +14,15 @@ const io = new Server(server, {
     }
 }); 
 
+
+
+io.on('connection', (socket)=>{
+    console.log(`User ${socket.id} connected`)
+}); 
+
+io.on('disconnect', ()=>{
+    console.log('User Disconnected')
+}); 
 
 
 server.listen(3001, ()=>console.log("Server Running")); 
