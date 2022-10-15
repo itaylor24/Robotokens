@@ -1,5 +1,10 @@
-const express = require('express'); 
-const app = express(); 
+
+const io = require('socket.io')(); 
+
+io.on('connection', client=>{
+    client.emit('init', {data: 'connected'}); 
+
+}); 
 
 
-app.listen(3000, ()=> console.log("Server Started")); 
+io.listen(3000, ()=> console.log("Server Started")); 
