@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import styled, {keyframes} from 'styled-components'; 
 import Block from './Block';
 import BlockList from './BlockList';
 import CreateBlockButton from './CreateBlockButton';
@@ -7,15 +6,14 @@ import Script from './Script';
 
 const CreateBlockCode = (props) =>{
 
-    const [script, updateScript] = useState([]); 
-    const [blocklist, updateBlockList] = useState([]); 
-
+    const [script, updateScript] = useState(['run (30 spaces)', 'walk (40 spaces)']); 
+    const [blocklist, updateBlockList] = useState([{name: 'wait', instruction: '30 spaces'}, {name: 'walk', instruction: '40 spaces'}]); 
 
     return (<div>
-        
-        <BlockList />
+
+        <BlockList blocklist = {blocklist}/>
         <CreateBlockButton />
-        <Script />
+        <Script script = {script}/>
 
     </div>)
 }

@@ -1,9 +1,13 @@
 import React from 'react'
-import styled, {keyframes} from 'styled-components'
+import CreateBlockCode from '../Components/BlockCode/CreateBlockCode'
 
 const create = () => {
   return (
-    <div>create</div>
+    <div>
+      create
+      <CreateBlockCode  />
+    </div>
+
   )
 }
 
