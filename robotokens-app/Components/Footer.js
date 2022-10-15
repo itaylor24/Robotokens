@@ -55,11 +55,7 @@ const Foot = styled.div`
   box-sizing: border-box;
   background-color: #B3B3B3;
   color: white;
-<<<<<<< HEAD
   padding: 8vw;
-=======
-  padding: 120px;
->>>>>>> 27985f3965734a6dcd66efca7125f5f6dc802e64
 `
 const Image2 = styled.img`
   float: bottom;
@@ -73,11 +69,6 @@ const Container = styled.div`
 
 const Title = styled.div`
   color: white;
-<<<<<<< HEAD
-//   font-weight: 800;
-=======
-  font-weight: 800;
->>>>>>> 27985f3965734a6dcd66efca7125f5f6dc802e64
   font-family: Impact;
   font-size: 25px;
   line-height: 200%;
@@ -105,10 +96,5 @@ const Text2 = styled.div`
   float: bottom;
 `
 
-<<<<<<< HEAD
-
 export default Footer
-=======
-const Link = styled.a`
-`
->>>>>>> 27985f3965734a6dcd66efca7125f5f6dc802e64
+

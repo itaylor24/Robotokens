@@ -38,7 +38,7 @@ flex-direction: column;
 
 const MainTitle = styled.div`
 font-size: 4vw;
-margin-top: 3vw;
+margin-top: 4vw;
 margin-bottom: 0vw;
 font-weight: 600;
 `
@@ -51,7 +51,7 @@ align-items: center;
 align-text: center;
 justify-content: center;
 grid-template-columns: 2fr 1fr;
-margin-bottom: 3vw;
+margin-bottom: 5vw;
 `
 
 const SubTitle = styled.div`

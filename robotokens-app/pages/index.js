@@ -1,44 +1,21 @@
 import Head from 'next/head'
 import Image from 'next/image'
-<<<<<<< HEAD
 import Section2 from '../Components/Section2'
 import robot from '../public/robot4.gif'
-=======
-import robot from '../public/robot4.gif'
-import mit from '../public/mit.jpg'
->>>>>>> 27985f3965734a6dcd66efca7125f5f6dc802e64
 import styled from 'styled-components'
 
 export default function Home() {
   return (
-<<<<<<< HEAD
     <>
         <Black>
       <Container>
         <ImgContainer>
           <Image
-=======
-    // <div>HELLO</div>
-    // <img src={require('/Image.png').default} />
-    // <img src={'/robot.gif'} />
-    // <img src={'/Image.png'} />
-    <Black>
-      <Container>
-
-        <ImgContainer>
-          <Image
-              // src="https://www.mit.edu/files/images/201807/15656704711_00457bd2c9_b_1.jpg"
-              // src = "https://example.com/test"
->>>>>>> 27985f3965734a6dcd66efca7125f5f6dc802e64
               src = "/robot4.gif"
               alt="robot"
               layout="responsive"
               width={500}
               height={300}
-<<<<<<< HEAD
-=======
-              // opacity={0.5}
->>>>>>> 27985f3965734a6dcd66efca7125f5f6dc802e64
           />
         </ImgContainer>
 
@@ -48,15 +25,8 @@ export default function Home() {
 
       </Container>
     </Black>
-<<<<<<< HEAD
         <Section2 />
     </>
-=======
-
-    // <Image src={'https://www.example.com/banner.jpg'} alt='Home Page' width={100} height={100} />
-    
-  // backgroundImage: /robot2.gif;
->>>>>>> 27985f3965734a6dcd66efca7125f5f6dc802e64
   )
 }
 
@@ -86,8 +56,4 @@ const Container = styled.div`
 
 const Black = styled.div`
   background-color: black;
-<<<<<<< HEAD
 `
-=======
-`
->>>>>>> 27985f3965734a6dcd66efca7125f5f6dc802e64
