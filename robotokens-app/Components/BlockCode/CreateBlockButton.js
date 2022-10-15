@@ -7,7 +7,6 @@ const CreateBlockButton = (props) =>{
 
     return (
     <CreateButtonContainer onClick={click}>
-        
         Add Block
     </CreateButtonContainer>
     )

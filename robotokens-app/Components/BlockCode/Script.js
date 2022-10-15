@@ -8,9 +8,9 @@ const Script = (props) =>{
     return (<ScriptContainer>
             Script
         {script.map((item, index)=>{
-            return(<p key={index}>
+            return(<div key={index}>
                 {item}
-            </p>)
+            </div>)
         })}
     </ScriptContainer>)
 }
@@ -18,6 +18,7 @@ const Script = (props) =>{
 
 const ScriptContainer = styled.div`
     display: flex; 
+    padding: 10px; 
     justify-content: center; 
     align-items: center; 
     flex-direction: column; 

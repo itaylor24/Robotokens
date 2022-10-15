@@ -1,6 +1,7 @@
 import React from 'react'
 import Block from './Block';
 import styled from 'styled-components'; 
+import Script from './Script';
 
 const BlockList = (props) =>{
 
@@ -10,6 +11,7 @@ const BlockList = (props) =>{
         {blocklist.map((item,index)=>{
             return <Block block = {item} key={`${index}`+item.name} />
         })}
+
     </BlockListContainer>)
 }
 
@@ -20,6 +22,7 @@ const BlockListContainer = styled.div`
     border: 5px solid black; 
     flex-direction: column; 
     border-radius: 10px; 
+    min-height: 60px; 
 `
 
 export default BlockList

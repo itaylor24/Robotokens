@@ -7,10 +7,11 @@ import Popup from 'reactjs-popup';
 import styled from 'styled-components';
 import BlockSelectorModal from './BlockSelectorModal';
 
+
 const CreateBlockCode = (props) =>{
 
-    const [script, updateScript] = useState(['run (30 spaces)', 'walk (40 spaces)']); 
-    const [blocklist, updateBlockList] = useState([{name: 'wait', instruction: '30 spaces'}, {name: 'walk', instruction: '40 spaces'}]); 
+    const [script, updateScript] = useState([]); 
+    const [blocklist, updateBlockList] = useState([]); 
     const [showModal, setShowModal] = useState(false); 
 
     const handleClick = () =>{
@@ -23,19 +24,28 @@ const CreateBlockCode = (props) =>{
         updateBlockList(newBlockList); 
     }
 
+    const handleUpdateScript = (newLine)=>{
+        let newScriptList = [...script]; 
+        newScriptList.push(newLine); 
+        updateScript(newScriptList);
+    }
 
     return (<div>
+        <CreateContainer>
+            <BlockList  blocklist = {blocklist}/>
+            <Script script={script} /> 
+        </CreateContainer>
 
-        <BlockList blocklist = {blocklist}/>
         <CreateBlockButton click={handleClick}/>
-        <BlockSelectorModal showModal ={showModal} setShowModal={setShowModal} handleAddBlock = {handleAddBlock} />
-        <Script script = {script}/>
+        <BlockSelectorModal showModal ={showModal} setShowModal={setShowModal} handleAddBlock = {handleAddBlock} 
+        handleUpdateScript = {handleUpdateScript}/>
 
     </div>)
 }
 
-const Trigger = styled.button`
-    display: contents; 
+const CreateContainer = styled.div`
+    display:grid;
+    grid-template-columns: 75% 25%; 
 `
 
 

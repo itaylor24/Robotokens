@@ -21,6 +21,7 @@ const BlockTitle = styled.div`
     font-weight: bold; 
     color: white; 
     font-size: 20px;  
+    margin-right: 10px; 
    
 `
 const BlockInstruction = styled.div`
@@ -32,16 +33,14 @@ const BlockContainer = styled.div`
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    flex-direction: column; 
     width: fit-content; 
-    height: 60px; 
     padding: 20px; 
     padding-top: 10px; 
     padding-bottom: 10px; 
     border-radius: 10px; 
-    margin-bottom: 10px; 
+    margin-bottom: 5px; 
+    margin-top: 5px; 
    
-
     ${props => props.name === 'run' && css  `
         background-color: red; 
     `}

@@ -5,7 +5,7 @@ import { MdClose } from 'react-icons/md';
 
 // import {Translator, Translate} from 'react-auto-translate';
  
-export const BlockSelectorModal = ({ showModal, setShowModal, handleAddBlock}) => {
+export const BlockSelectorModal = ({ showModal, setShowModal, handleAddBlock, handleUpdateScript}) => {
  
     const modalRef = useRef();
     const [instruction, setInstruction] = useState(null); 
@@ -79,10 +79,13 @@ return (
                 <SaveButton onClick = {(evt) => {
 
                     if(option && instruction){
+                        
                         handleAddBlock({name: ''+option.toLowerCase(), instruction: '' +instruction}); 
+                        handleUpdateScript(`${option.toLowerCase()}`+"(" +`${instruction}`+ ")")
                         setShowModal(prev=>!prev);  
                         setOption(null); 
                         setInstruction(null); 
+
                     }else{
                         alert("All Fields Required"); 
                     }
