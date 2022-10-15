@@ -1,8 +1,8 @@
 import React from 'react'
 
 
-const create = (props) => {
-
+const findmatch = (props) => {
+  
   return (
     <div>
       match
@@ -13,4 +13,4 @@ const create = (props) => {
 }
 
 
-export default create
+export default findmatch
