@@ -39,13 +39,15 @@ const Footer = () => {
 
         </Container>
           
-          <Image2
-            src = "/logo.png"
-            alt="logo"
-            width={50}
-            height={50}
-          />
-          <Text2>© 2022 RoboTokens. All Rights Reserved</Text2>
+          <Bottom>
+            <Image2
+              src = "/logo.png"
+              alt="logo"
+              width={50}
+              height={50}
+            />
+            <Text2>© 2022 RoboTokens. All Rights Reserved</Text2>
+          </Bottom>
       
       </Foot>
   )
@@ -56,15 +58,16 @@ const Foot = styled.div`
   background-color: #B3B3B3;
   color: white;
   padding: 8vw;
+  padding-bottom: 5vw;
 `
 const Image2 = styled.img`
-  float: bottom;
 `
 
 const Container = styled.div`
   width: 80%;
   margin: auto;
   height: 220px;
+  margin-bottom: 1vw;
 `
 
 const Title = styled.div`
@@ -72,6 +75,15 @@ const Title = styled.div`
   font-family: Impact;
   font-size: 25px;
   line-height: 200%;
+`
+
+const Bottom = styled.div`
+  display: flex;
+  justify-content: space-between;
+  
+  flex-direction: row;
+  align-items: flex-end;
+  // vertical-align: baseline;
 `
 
 const Col = styled.div`
@@ -91,9 +103,8 @@ const Text2 = styled.div`
   color: white;
   font-weight: 300;
   font-size: 15px;
-  line-height: 200%;
+  height: fit-content;
   float: right;
-  float: bottom;
 `
 
 export default Footer

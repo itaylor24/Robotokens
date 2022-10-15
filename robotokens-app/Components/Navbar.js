@@ -49,6 +49,7 @@ const Title = styled.a`
   color: white;
   cursor: pointer;
   display: inline-block;
+  letter-spacing: 0.03vw;
 `
 
 const Btn1 = styled.button`
@@ -57,7 +58,7 @@ const Btn1 = styled.button`
   border-radius: 3px;
   display: inline-block;
   float: right;
-  background-color: #229F73;  
+  background-color: #229F73;
   font-family: 'Verdana';
   padding: 1.5vw;
   border: none;
