@@ -8,6 +8,13 @@ const server = http.createServer(app)
 
 app.use(cors); 
 
+const sum = (sumArray)=>{
+    const result = sumArray.reduce((partialSum, a) => partialSum + a, 0);
+    return result 
+}
+    
+
+
 const io = new Server(server, {
     cors: {
         origin: "http://localhost:3000"
@@ -18,6 +25,7 @@ const io = new Server(server, {
 let activePlayers = 0; 
 let roomNo; 
 const activeRooms = {}
+const roomPlayers = {}; 
 
 const history = []; 
 
@@ -27,12 +35,13 @@ io.on('connection', (socket)=>{
     socket.on('find', (data)=>{
         activePlayers++; 
         roomNo = Math.round(activePlayers/2); 
+        roomPlayers[socket.id] = roomNo; 
         socket.join(roomNo); 
-        console.log(roomNo); 
+
         socket.emit('joined_room', roomNo); 
-        console.log(data); 
+
         if(activePlayers%2===1){
-            activeRooms[roomNo] = {status:'waiting for players', players: [socket.id] }; 
+            activeRooms[roomNo] = {status:'waiting for players', players: [socket.id], bids:{0:[], 1:[]}}; 
         }else 
         if(activePlayers%2===0){
             activeRooms[roomNo].status = 'started countdown'; 
@@ -42,8 +51,10 @@ io.on('connection', (socket)=>{
 
             let time = Date.now(); 
             setTimeout(()=>{
+                let roomNo = roomPlayers[socket.id];
+                
                 io.sockets.in(roomNo).emit('start_game'); 
-                console.log("hi"); 
+                console.log("hi", roomNo); 
                 activeRooms[roomNo].status = 'started'; 
             }, 10000)
             
@@ -54,22 +65,31 @@ io.on('connection', (socket)=>{
             
         }
 
-        console.log(activeRooms); 
+
 
         socket.on('recieved', ()=>{
+            
             setTimeout(()=>{
-                io.sockets.in(roomNo).emit('waiting', {time: 10000-(Date.now()-activeRooms[roomNo].time), betAmounts:{1:0, 2:0}});
+                let roomNo = roomPlayers[socket.id]; 
+
+                let bidsForPlayer1 = activeRooms[roomNo].bids[0] ? activeRooms[roomNo].bids[0] : [0]; 
+                let bidsForPlayer2 = activeRooms[roomNo].bids[1] ? activeRooms[roomNo].bids[1] : [0]; 
+
+                io.sockets.in(roomNo).emit('waiting', {time: 10000-(Date.now()-activeRooms[roomNo].time), betAmounts:{1:sum(bidsForPlayer1), 2:sum(bidsForPlayer2)}});
             }, 1000); 
              
         }); 
 
         socket.on("disconnecting", () => {
+
             activePlayers-= 1; 
 
-            const index = activeRooms[roomNo].players.indexOf(socket.id);
+            const index = activeRooms[roomNo].players?.indexOf(socket.id);
             if (index > -1) { // only splice array when item is found
                 activeRooms.splice(index, 1); // 2nd parameter means remove one item only
             }
+
+            delete roomPlayers[socket.id]; 
 
             console.log(socket.rooms); // the Set contains at least the socket ID
             if(activePlayers % 2 === 0){
@@ -85,7 +105,7 @@ io.on('connection', (socket)=>{
             let loserId = winnerId === 1? 2 : 1; 
             let thisRoom = ''+data.room 
             history.push({winner: activeRooms[thisRoom].players[winnerId], loser:activeRooms[thisRoom].players[loserId]}); 
-            console.log(history); 
+
             io.in(thisRoom).disconnectSockets(); 
             activePlayers -= 2; 
             delete activeRooms[thisRoom]; 
@@ -107,6 +127,16 @@ io.on('connection', (socket)=>{
         socket.emit('send_battles', roomsArray)
     })
 
+    socket.on('wager', (data)=>{
+        let {roomNo, bid} = data; 
+
+        let bidPlayer = bid.forPlayer; 
+        let bidder = bid.author; 
+        let amount = bid.amount;
+        
+        activeRooms[roomNo].bids[bidPlayer].push({author: bidder, amount}) 
+
+    })
 
 
 }); 
