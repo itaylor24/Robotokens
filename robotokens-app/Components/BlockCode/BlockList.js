@@ -16,13 +16,13 @@ const BlockList = (props) =>{
 }
 
 const BlockListContainer = styled.div`
-    display:flex; 
-    justify-content:center; 
+    display:grid; 
+    grid-template-rows: repeat(10, 1fr); 
+    grid-template-columns: repeat(6, 1fr); 
     padding: 20px; 
     border: 5px solid black; 
-    flex-direction: column; 
     border-radius: 10px; 
-    min-height: 60px; 
+    height: 10vw; 
 `
 
 export default BlockList

@@ -18,7 +18,7 @@ const CreateButtonContainer = styled.div`
     padding: 10px; 
     background-color: green; 
     color: white; 
-    margin: 10px; 
+    margin: 1vw; 
     border-radius: 10px; 
     &:hover{
        filter: brightness(.6); 

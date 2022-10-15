@@ -20,7 +20,7 @@ io.on('connection', (socket)=>{
     console.log(`User ${socket.id} connected`)
 }); 
 
-io.on('disconnect', ()=>{
+io.on('disconnect', (socket)=>{
     console.log('User Disconnected')
 }); 
 

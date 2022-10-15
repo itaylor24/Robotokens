@@ -33,14 +33,17 @@ const BlockContainer = styled.div`
     display: flex; 
     justify-content: center; 
     align-items: center; 
+
     width: fit-content; 
+    height: fit-content; 
+    
     padding: 20px; 
     padding-top: 10px; 
     padding-bottom: 10px; 
     border-radius: 10px; 
     margin-bottom: 5px; 
     margin-top: 5px; 
-   
+    
     ${props => props.name === 'run' && css  `
         background-color: red; 
     `}
