@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import Head from 'next/head'
@@ -10,10 +10,11 @@ const BattleList = (props) => {
 
     const {battleList} = props;
 
+
     return (
         battleList.map((item, index) =>
 
-
+             
             <Item>
                 <Adjacent>
                     <PlayerName>{item.players[0]}</PlayerName> <PoolValue>Pool value: ${item.bets[0]}</PoolValue> <Text>vs</Text> <PlayerName>{item.players[1]}</PlayerName> <PoolValue>Pool value: ${item.bets[1]}</PoolValue>
@@ -21,7 +22,7 @@ const BattleList = (props) => {
 
                 <Adjacent>
                     {/* <Text>{item.time / 1000}:00</Text> */}
-                    <Text>{String(Math.floor((item.time / (1000 * 60)) % 60)).padStart(2, '0')}:{String(Math.floor((item.time / 1000) % 60)).padStart(2, '0')}</Text>
+                    <Text>{String(Math.floor(((50_000 - (Date.now() -item.time )) / (1000 * 60)) % 60)).padStart(2, '0')}:{String(Math.ceil(((50_000 - (Date.now() -item.time )) / 1000) % 60)).padStart(2, '0')}</Text>
                 </Adjacent>
                 
             </Item>
