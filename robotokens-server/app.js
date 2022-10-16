@@ -53,13 +53,13 @@ io.on('connection', (socket)=>{
                 let roomNo = roomPlayers[socket.id];
 
                 io.sockets.in(roomNo).emit('start_game'); 
-                console.log("hi", roomNo); 
+
                 activeRooms[roomNo].status = 'started'; 
-            }, 5_000)
+            }, 20_000)
             
             activeRooms[roomNo].time = time; 
             
-            io.sockets.in(roomNo).emit('waiting', {time: 5_000-(Date.now()-activeRooms[roomNo].time), betAmounts:{1:0, 2:0}}); 
+            io.sockets.in(roomNo).emit('waiting', {time: 20_000-(Date.now()-activeRooms[roomNo].time), betAmounts:{1:0, 2:0}}); 
             
             
         }
@@ -71,10 +71,11 @@ io.on('connection', (socket)=>{
             setTimeout(()=>{
                 let roomNo = roomPlayers[socket.id]; 
 
-                let bidsForPlayer1 = activeRooms[roomNo].bids[0] ? activeRooms[roomNo].bids[0] : [0]; 
-                let bidsForPlayer2 = activeRooms[roomNo].bids[1] ? activeRooms[roomNo].bids[1] : [0]; 
-
-                socket.to(roomNo).emit('waiting', {time: 5_000-(Date.now()-activeRooms[roomNo].time), betAmounts:{1:sum(bidsForPlayer1), 2:sum(bidsForPlayer2)}});
+                let bidsForPlayer1 = activeRooms[roomNo].bids[0] ? activeRooms[roomNo].bids[0].map((item)=>{return item.amount}) : [0]; 
+                let bidsForPlayer2 = activeRooms[roomNo].bids[1] ? activeRooms[roomNo].bids[1].map((item)=>{return item.amount}) : [0]; 
+                
+                socket.to(roomNo).emit('waiting', {time: 20_000-(Date.now()-activeRooms[roomNo].time), betAmounts:{1:sum(bidsForPlayer1), 2:sum(bidsForPlayer2)}});
+                console.log({time: 20_000-(Date.now()-activeRooms[roomNo].time), betAmounts:{1:sum(bidsForPlayer1), 2:sum(bidsForPlayer2)}}); 
             }, 1000); 
              
         }); 
@@ -112,12 +113,12 @@ io.on('connection', (socket)=>{
 
     socket.on('wager', (data)=>{
         let {roomNo, bid} = data; 
-
+        console.log(data); 
         let bidPlayer = bid.forPlayer; 
         let bidder = bid.author; 
         let amount = bid.amount;
         
-        activeRooms[roomNo].bids[bidPlayer].push({author: bidder, amount}) 
+        activeRooms[roomNo].bids[bidPlayer].push({author: bidder, amount:amount}) 
 
     })
 

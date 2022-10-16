@@ -18,9 +18,9 @@ const wager = () => {
       socket.on('send_battles', (data)=>{
         let newList = data.map((item,index)=>{
   
-          let bidsForPlayer1 = item.bids[0] ? item.bids[0] : [0]; 
-          let bidsForPlayer2 = item.bids[1] ? item.bids[1] : [0];
-          return {time: item.time, players: item.players, bets: {0: sum(bidsForPlayer1), 1: sum(bidsForPlayer2)}}
+          let bidsForPlayer1 = item.bids[0] ? item.bids[0].map((item)=>{return item.amount}) : [0]; 
+          let bidsForPlayer2 = item.bids[1] ? item.bids[1].map((item)=>{return item.amount}) : [0];
+          return {time: item.time, players: item.players, betAmounts: {1: sum(bidsForPlayer1), 2: sum(bidsForPlayer2)}}
   
         }); 
 
