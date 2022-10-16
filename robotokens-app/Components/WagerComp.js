@@ -1,28 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import BattleList from '../Components/BattleList'
 
-const WagerComp = () => {
+const WagerComp = (props) => {
 
-  return (
-    <Section>
-        <MainTitle>WAGER</MainTitle>  
-        <SubTitle>Queue List</SubTitle>
-        <CurrentBattlesContainer>
-            <BattleList battleList = {[
-                {players: {0: "Robot 1", 1: "Robot 2"}, bets: {0: 100, 1: 300}, time: 3 * 1000}, 
-                {players: {0: "The Pulverizer", 1: "Robot 2"}, bets: {0: 100, 1: 300}, time: 64 * 1000},
-                {players: {0: "AI 3", 1: "Robot 2"}, bets: {0: 100, 1: 300}, time: 3000},
-                {players: {0: "Robot 1", 1: "Robot 2"}, bets: {0: 100, 1: 300}, time: 3000},
-                {players: {0: "Robot 1", 1: "Robot 2"}, bets: {0: 100, 1: 300}, time: 3000},
-                {players: {0: "Robot 1", 1: "Robot 2"}, bets: {0: 100, 1: 300}, time: 3000},
-                {players: {0: "Robot 1", 1: "Robot 2"}, bets: {0: 100, 1: 300}, time: 3000},
-            ]}
-            />
-                
-        </CurrentBattlesContainer>
-    </Section>
-  )
+    const {battleList} = props; 
+
+
+    return (
+        <Section>
+            <MainTitle>WAGER</MainTitle>  
+            <SubTitle>Queue List</SubTitle>
+            <CurrentBattlesContainer>
+                <BattleList battleList = {battleList}
+                />
+                    
+            </CurrentBattlesContainer>
+        </Section>
+    )
 }
 
 
