@@ -8,14 +8,35 @@ import { Unity, useUnityContext } from "react-unity-webgl";
 
 const MatchScreen = (props) => {
 
-    const {battleList} = props;
+    const {scripts} = props;
 
-    const { unityProvider } = useUnityContext({
+    const [isGameOver, setIsGameOver] = useState(false);
+    const [winner, setWinner] = useState(null);
+
+
+    const { unityProvider, addEventListener, removeEventListener, sendMessage } = useUnityContext({
       loaderUrl: "/assets/RoboTokens_Draft1.loader.js",
       dataUrl: "/assets/RoboTokens_Draft1.data",
       frameworkUrl: "/assets/RoboTokens_Draft1.framework.js",
       codeUrl: "/assets/RoboTokens_Draft1.wasm",
     });
+
+    
+
+    const handleGameOver = useCallback((winner) => {
+        setIsGameOver(true);
+        setWinner(winner)
+      }, []);
+
+      useEffect(() => {
+
+        sendMessage("GameController", "StartMatch", [scripts[0], scripts[1]]);
+
+        addEventListener("GameOver", handleGameOver);
+        return () => {
+          removeEventListener("GameOver", handleGameOver);
+        };
+      }, [addEventListener, removeEventListener, handleGameOver]);
 
 
     return (
