@@ -9,13 +9,13 @@ import { Unity, useUnityContext} from "react-unity-webgl";
 const MatchScreen = (props) => {
 
     const {scripts, updateGameOver} = props;
-    const { isLoaded } = useUnityContext();
+
 
     const [isGameOver, setIsGameOver] = useState(false);
     const [winner, setWinner] = useState(null);
 
 
-    const { unityProvider, addEventListener, removeEventListener, sendMessage } = useUnityContext({
+    const { unityProvider, addEventListener, removeEventListener, sendMessage, isLoaded } = useUnityContext({
       loaderUrl: "/assets/RoboTokens_Draft1.loader.js",
       dataUrl: "/assets/RoboTokens_Draft1.data",
       frameworkUrl: "/assets/RoboTokens_Draft1.framework.js",
@@ -33,22 +33,25 @@ const MatchScreen = (props) => {
       }, []);
 
       useEffect(() => {
-        if(isLoaded){
-            console.log("HEY"); 
-            sendMessage("GameController", "StartMech1", [['run(30),throw(50),wait(1),turn(30)']]);
-            sendMessage("GameController", "StartMech2", [['run(30),throw(50),wait(1),turn(30)']]);
 
-        }else{
+        if(isLoaded){
+
+            console.log("HEY"); 
+            sendMessage("GameController", "StartMech1", 'run(30),walk(10),wait(1),turn(30),throw(20)');
+            sendMessage("GameController", "StartMech2", 'run(30),throw(50),wait(3),turn(30)');
+
             console.log("addedListener"); 
             addEventListener("GameOver", handleGameOver);
 
             return () => {
             removeEventListener("GameOver", handleGameOver);
-            };
+        };
         }
         
+        
+        
 
-      }, [addEventListener, removeEventListener, handleGameOver, isLoaded]);
+      }, [isLoaded]);
 
 
     return (
