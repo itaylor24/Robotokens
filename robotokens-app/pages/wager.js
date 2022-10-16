@@ -26,7 +26,7 @@ const wager = () => {
 
         setTimeout(()=>{
           socket.emit('query_battles'); 
-        },20_000)
+        },5_000)
 
         setBattleList(newList); 
   
@@ -35,10 +35,6 @@ const wager = () => {
 
     },[])
 
-    useEffect(()=>{
-      setMounted(true); 
-      console.log(mounted); 
-    },[])
 
   return (
     <WagerComp battleList ={battleList} />

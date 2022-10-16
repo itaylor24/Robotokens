@@ -74,7 +74,7 @@ io.on('connection', (socket)=>{
                 let bidsForPlayer1 = activeRooms[roomNo].bids[0] ? activeRooms[roomNo].bids[0] : [0]; 
                 let bidsForPlayer2 = activeRooms[roomNo].bids[1] ? activeRooms[roomNo].bids[1] : [0]; 
 
-                io.sockets.in(roomNo).emit('waiting', {time: 50_000-(Date.now()-activeRooms[roomNo].time), betAmounts:{1:sum(bidsForPlayer1), 2:sum(bidsForPlayer2)}});
+                socket.to(roomNo).emit('waiting', {time: 50_000-(Date.now()-activeRooms[roomNo].time), betAmounts:{1:sum(bidsForPlayer1), 2:sum(bidsForPlayer2)}});
             }, 1000); 
              
         }); 
@@ -99,20 +99,14 @@ io.on('connection', (socket)=>{
 
     socket.on('query_battles', ()=>{
 
- 
         let roomsArray = Object.keys(activeRooms).reverse().map((item)=>{return activeRooms[item]}); 
-        
-        console.log(roomsArray); 
 
         roomsArray = roomsArray.filter((item)=>{
              
             return item.status === "started countdown"; 
         })
 
-
-
         socket.emit('send_battles', roomsArray); 
- 
         
     })
 
