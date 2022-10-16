@@ -4,7 +4,7 @@ import BattleList from '../Components/BattleList'
 
 const WagerComp = (props) => {
 
-    const {battleList} = props; 
+   
 
 
     return (
@@ -12,7 +12,13 @@ const WagerComp = (props) => {
             <MainTitle>WAGER</MainTitle>  
             <SubTitle>Queue List</SubTitle>
             <CurrentBattlesContainer>
-                <BattleList battleList = {battleList}
+                <BattleList battleList = {[
+                    {players: {0:"Pulverizer", 1:"Baymax"}, betAmounts:{1:200, 2:300}, time: Date.now() + 2_000},
+                    {players: {0:"Optimus Prime", 1:"Bot"}, betAmounts:{1:350, 2:10}, time: Date.now() + 3500}, 
+                    {players: {0:"Droids", 1:"Android"}, betAmounts:{1:0, 2:3000}, time: Date.now() + 4356},
+                    {players: {0:"Dexter", 1:"R2D2"}, betAmounts:{1:40, 2:20}, time: Date.now() + 12456 },
+                    {players: {0:"C3P0", 1:"AI"}, betAmounts:{1:250, 2:3000}, time: Date.now() +18188},
+                ]}
                 />
                     
             </CurrentBattlesContainer>

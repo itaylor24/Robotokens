@@ -16,10 +16,10 @@ const MatchScreen = (props) => {
 
 
     const { unityProvider, addEventListener, removeEventListener, sendMessage, isLoaded } = useUnityContext({
-      loaderUrl: "/assets/RoboTokens_Draft1.loader.js",
-      dataUrl: "/assets/RoboTokens_Draft1.data",
-      frameworkUrl: "/assets/RoboTokens_Draft1.framework.js",
-      codeUrl: "/assets/RoboTokens_Draft1.wasm",
+      loaderUrl: "/assets/RoboTokens_Draft2.loader.js",
+      dataUrl: "/assets/RoboTokens_Draft2.data",
+      frameworkUrl: "/assets/RoboTokens_Draft2.framework.js",
+      codeUrl: "/assets/RoboTokens_Draft2.wasm",
     });
 
     
