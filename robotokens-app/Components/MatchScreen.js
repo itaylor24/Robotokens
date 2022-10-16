@@ -16,10 +16,10 @@ const MatchScreen = (props) => {
 
 
     const { unityProvider, addEventListener, removeEventListener, sendMessage, isLoaded } = useUnityContext({
-      loaderUrl: "/assets/RoboTokens_Draft2.loader.js",
-      dataUrl: "/assets/RoboTokens_Draft2.data",
-      frameworkUrl: "/assets/RoboTokens_Draft2.framework.js",
-      codeUrl: "/assets/RoboTokens_Draft2.wasm",
+      loaderUrl: "/assets/RoboTokens_Draft3.loader.js",
+      dataUrl: "/assets/RoboTokens_Draft3.data",
+      frameworkUrl: "/assets/RoboTokens_Draft3.framework.js",
+      codeUrl: "/assets/RoboTokens_Draft3.wasm",
     });
 
     
@@ -38,7 +38,7 @@ const MatchScreen = (props) => {
 
             console.log("HEY"); 
             sendMessage("GameController", "StartMech1", 'run(30),walk(10),wait(1),turn(30),throw(20)');
-            sendMessage("GameController", "StartMech2", 'run(30),throw(50),wait(3),turn(30)');
+            sendMessage("GameController", "StartMech2", 'run(30),throw(20),wait(3),turn(10)');
 
             console.log("addedListener"); 
             addEventListener("GameOver", handleGameOver);
