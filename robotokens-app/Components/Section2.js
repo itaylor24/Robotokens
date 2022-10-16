@@ -81,7 +81,7 @@ const Details = styled.div`
   text-align: center;
   justify-content: center;
   // background-color: green;
-  font-size: 1.4vw;
+  font-size: 1.2vw;
   line-height: 2;
   margin-top: 3vw;
   margin-bottom: 0vw;
