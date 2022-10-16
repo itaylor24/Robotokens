@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import {IconContext} from "react-icons";
 import { SiFacebook, SiInstagram, SiTwitter} from "react-icons/si";
 import logo from "../public/logo.png"
+import InjectPiNetwork from '../PiIntegration/InjectPiNetwork';
 import Link from 'next/link';
 
 const Footer = () => {
@@ -29,12 +30,15 @@ const Footer = () => {
             <Title>Join Us</Title>
             <Text><Link href="./">Careers</Link></Text>
             <Text><Link href="./">Make A Suggestion</Link></Text>
+            <Text><Link href="./">Show Love With PI</Link></Text>
           </Col>
 
           <Col>
             <Title>Learn</Title>
             <Text><Link href="./">Cryptocurrencies</Link></Text>
             <Text><Link href="./">Blockchain</Link></Text>
+            <Text><Link href="https://minepi.com/white-paper">Learn More About PI</Link></Text>
+
           </Col>
 
         </Container>
