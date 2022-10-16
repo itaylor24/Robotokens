@@ -1,18 +1,58 @@
-import React from 'react'
+import React, {useState, useRef} from 'react'
+import {ethers, BigNumber} from "ethers";
+import RoboTokenContract from "../artifacts/contracts/RoboTokenContract.sol/RoboTokenContract.json"
 import styled from 'styled-components'
 import CreateBlockCode from '../Components/BlockCode/CreateBlockCode'
 import socket from '../utils/socket'; 
+import { useStateContext } from '../context/StateContext'
+import { toast } from "react-hot-toast";
+import { useRouter } from 'next/router'
+
+const roboTokensNFTContractAddress = "0xB471c5fc4d130080C862686D5bE692822e713D9a";
 
 const create = () => {
+
+  const router = useRouter()
+  const { accounts } = useStateContext();
+  const isConnected = Boolean(accounts[0]);
+
+  const [script, updateScript] = useState([]); 
+  const nameRef = useRef();
+  const descriptionRef = useRef();
+
+  async function handleMint() {
+    if (window.ethereum) {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(
+          roboTokensNFTContractAddress,
+          RoboTokenContract.abi,
+          signer
+        );
+        try {
+            const response = await contract.createMyRoboToken(nameRef.current.value,descriptionRef.current.value,accounts[0],script,{
+            value: ethers.utils.parseEther((0.02).toString()), });
+            toast.success(`Succesfully Minted Your ${nameRef.current.value}!`);   
+            router.push("./");
+            console.log('response: ', response);
+            // console.log('Name: ', nameRef.current.value);
+            // console.log('Dsc: ', descriptionRef.current.value);
+            // console.log('Script: ', script);
+            // console.log('Sender: ', accounts[0]);
+          } catch (err) {
+            console.log('error: ', err);
+        }
+    }
+}
 
   return (
     <Section>
       <MainTitle>Create A RoboToken</MainTitle>
-      <Container><SubTitle>Robo Name:</SubTitle><NameInput /></Container>
-      <Container><SubTitle>Robo Description:</SubTitle><DescriptionInput /></Container>
+      <Container><SubTitle>Robo Name:</SubTitle><NameInput ref={nameRef}/></Container>
+      <Container><SubTitle>Robo Description:</SubTitle><DescriptionInput ref={descriptionRef}/></Container>
       <SubTitle>Create Script:</SubTitle>
-      <CreateBlockCode  />
-      <CreateButton>Create RoboToken</CreateButton>
+      <CreateBlockCode script = {script} updateScript = {updateScript} />
+      <CreateButton onClick={handleMint}>Create RoboToken</CreateButton>
     </Section>
 
   )

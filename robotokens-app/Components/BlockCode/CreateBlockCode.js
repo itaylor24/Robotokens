@@ -8,9 +8,8 @@ import styled from 'styled-components';
 import BlockSelectorModal from './BlockSelectorModal';
 
 
-const CreateBlockCode = (props) =>{
+const CreateBlockCode = ({script, updateScript}) =>{
 
-    const [script, updateScript] = useState([]); 
     const [blocklist, updateBlockList] = useState([]); 
     const [showModal, setShowModal] = useState(false); 
 

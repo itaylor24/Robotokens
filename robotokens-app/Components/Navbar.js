@@ -1,14 +1,15 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import styled from 'styled-components'
 import Link from 'next/link'
+import { useStateContext } from '../context/StateContext'
 
 const Navbar = () => {
-  function handleSubmit() {
-    // e.preventDefault();
-    console.log('You clicked submit.');
-  }
+
+  const { accounts, connectAccount } = useStateContext();
+  
+  const isConnected = Boolean(accounts[0]);
 
   return (
     <Header>
@@ -21,7 +22,7 @@ const Navbar = () => {
         />
       </BtnHome>
       <Link href="./"><Title >RoboTokens</Title></Link>
-      <Btn4>Connect Wallet</Btn4>
+      {isConnected ? <CurrentWallet><div>Current User:</div>{accounts[0].substring(0,7)}....{accounts[0].substr(-7)}</CurrentWallet> : <Btn4  onClick={connectAccount}>Connect Wallet</Btn4>}
       <Link href = "./wager"><Btn1 >Wager</Btn1></Link>
       <Link href="./battle"><Btn2 > Battle</Btn2></Link>
       <Link href="./create"><Btn3 >Create</Btn3></Link>
@@ -118,6 +119,30 @@ const Btn4 = styled.button`
     background-color: rgba(204, 167, 57, 0.3);
   }
 `
+
+const CurrentWallet = styled.div`
+margin: 0px 0px 0px 1vw;
+text-align: center;
+font-size: 1vw;
+border-radius: 3px;
+display: inline-block;
+float: right;
+font-weight: 600;
+border: 1px solid black;
+background-color: #cca739;
+font-family: 'Verdana';
+padding-left: 1.5vw;
+padding-right: 1.5vw;
+padding-top: 0.75vw;
+padding-bottom: 0.75vw;
+
+color: white;
+&:hover{
+  font-size: 1.1vw;
+  transition: all 0.3s ease;
+}
+`
+
 const BtnHome = styled.a`
 cursor: pointer;
 `

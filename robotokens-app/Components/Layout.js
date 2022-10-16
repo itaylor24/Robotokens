@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import Head from 'next/head'
 import GlobalStyles from '../styles/GlobalStyles'
 
 const Layout = ({children}) => {
+
   return (
     <>
     <Head>
@@ -14,7 +15,7 @@ const Layout = ({children}) => {
 
     <GlobalStyles/>
 
-    <Navbar/>
+    <Navbar />
         {children}
     <Footer />
 
