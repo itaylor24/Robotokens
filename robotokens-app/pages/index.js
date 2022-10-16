@@ -23,7 +23,7 @@ export default function Home() {
               Welcome to RoboTokens
             </Text2>
             <Text3>
-              Gotta Code 'em All.
+              Gotta Code 'em All
             </Text3>
           </TextHolder>
 
