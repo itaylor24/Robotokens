@@ -104,9 +104,16 @@ const battle = () => {
     )
 }
 
+
+
 const BetAmountContainer = styled.div`
   display: flex;
   justify-content: space-between;
+`
+const UnityContainer = styled.div`
+  padding: 3vw;
+  background-color: #B3B3B3;
+  margin-top: 0.8vw;
 `
 
 const Bet = styled.div`
@@ -148,7 +155,6 @@ const WaitRoomScreen = styled.div`
   justify-content: center;
   padding: 100px;
   text-align: center;
-
 `
 
 const TimeContainer = styled.div`
@@ -158,6 +164,18 @@ const TimeContainer = styled.div`
 
 const FindMatchButton = styled.button`
     
+  padding: 5vw;
+  font-size: 2.5vw;
+  font-family: Impact;
+  outline: 0px;
+  border: none;
+  cursor: pointer;
+  background-color: #229F73;
+  color: white;
+  border-radius: 0.4vw;
+  &:hover {
+    background-color: rgba(34, 159, 115, 0.5);
+  }
 `
 const MatchDisplay = styled.div`
   font-size: 30px; 
@@ -165,7 +183,18 @@ const MatchDisplay = styled.div`
 const MatchWaitDisplay = styled.div`
   font-size: 30px; 
 `
+
+const MatchWaitScreen = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px;
+  text-align: center;
+  flex-direction: column;
+`
 const WaitDisplay = styled.div`
   font-size: 30px; 
+  font-size: 2.5vw;
+  font-family: Impact;
 `
 export default battle
