@@ -4,13 +4,14 @@ import styled from "styled-components";
 import socket from '../utils/socket'; 
 import loading from '../public/loading.gif';
 import Image from 'next/image';
+import MatchScreen from '../Components/MatchScreen'
 
 const battle = () => {
     const [action, updateAction] = useState(null); 
     const [roomNo, setRoomNo] = useState(null); 
     const [gameTime, setGameTime] = useState(null); 
     const [betAmounts, setBetAmount] = useState(null); 
-    const [start, setStart] = useState(false); 
+    const [start, setStart] = useState(false);
 
     useEffect(()=>{
         console.log(action); 
@@ -93,15 +94,8 @@ const battle = () => {
         </MatchWaitScreen>
 
       }
-        {start === true && 
-        
-        <MatchScreen>
-          MATCH STARTED
-          <UnityContainer>
-
-          </UnityContainer>
-        </MatchScreen>
-          
+        {start === true &&
+          <MatchScreen />
         }
 
     </div>
@@ -109,23 +103,9 @@ const battle = () => {
     )
 }
 
-const MatchScreen = styled.div`
-  align-items: center;
-  justify-content: center;
-  padding: 100px;
-  text-align: center;
-  font-family: Impact;
-  font-size: 4vw;
-`
-
 const BetAmountContainer = styled.div`
   display: flex;
   justify-content: space-between;
-`
-const UnityContainer = styled.div`
-  padding: 3vw;
-  background-color: #B3B3B3;
-  margin-top: 0.8vw;
 `
 
 const Bet = styled.div`
