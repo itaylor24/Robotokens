@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback, useEffect} from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import Head from 'next/head'
 import GlobalStyles from '../styles/GlobalStyles'
 import styled from 'styled-components'
-import { Unity, useUnityContext, useCallback } from "react-unity-webgl";
+import { Unity, useUnityContext} from "react-unity-webgl";
 
 const MatchScreen = (props) => {
 
-    const {scripts} = props;
+    const {scripts, updateGameOver} = props;
+    const { isLoaded } = useUnityContext();
 
     const [isGameOver, setIsGameOver] = useState(false);
     const [winner, setWinner] = useState(null);
@@ -24,19 +25,30 @@ const MatchScreen = (props) => {
     
 
     const handleGameOver = useCallback((winner) => {
+
         setIsGameOver(true);
         setWinner(winner)
+        updateGameOver(winner);
+        
       }, []);
 
       useEffect(() => {
+        if(isLoaded){
+            console.log("HEY"); 
+            sendMessage("GameController", "StartMech1", [['run(30),throw(50),wait(1),turn(30)']]);
+            sendMessage("GameController", "StartMech2", [['run(30),throw(50),wait(1),turn(30)']]);
 
-        sendMessage("GameController", "StartMatch", [scripts[0], scripts[1]]);
+        }else{
+            console.log("addedListener"); 
+            addEventListener("GameOver", handleGameOver);
 
-        addEventListener("GameOver", handleGameOver);
-        return () => {
-          removeEventListener("GameOver", handleGameOver);
-        };
-      }, [addEventListener, removeEventListener, handleGameOver]);
+            return () => {
+            removeEventListener("GameOver", handleGameOver);
+            };
+        }
+        
+
+      }, [addEventListener, removeEventListener, handleGameOver, isLoaded]);
 
 
     return (

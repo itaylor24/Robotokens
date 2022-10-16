@@ -22,7 +22,7 @@ const BattleList = (props) => {
 
                 <Adjacent>
                     {/* <Text>{item.time / 1000}:00</Text> */}
-                    <Text>{String(Math.floor(((50_000 - (Date.now() -item.time )) / (1000 * 60)) % 60)).padStart(2, '0')}:{String(Math.ceil(((50_000 - (Date.now() -item.time )) / 1000) % 60)).padStart(2, '0')}</Text>
+                    <Text>{String(Math.floor(((5_000 - (Date.now() -item.time )) / (1000 * 60)) % 60)).padStart(2, '0')}:{String(Math.ceil(((5_000 - (Date.now() -item.time )) / 1000) % 60)).padStart(2, '0')}</Text>
                 </Adjacent>
                 
             </Item>

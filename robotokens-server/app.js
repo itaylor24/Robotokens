@@ -55,11 +55,11 @@ io.on('connection', (socket)=>{
                 io.sockets.in(roomNo).emit('start_game'); 
                 console.log("hi", roomNo); 
                 activeRooms[roomNo].status = 'started'; 
-            }, 50_000)
+            }, 5_000)
             
             activeRooms[roomNo].time = time; 
             
-            io.sockets.in(roomNo).emit('waiting', {time: 50_000-(Date.now()-activeRooms[roomNo].time), betAmounts:{1:0, 2:0}}); 
+            io.sockets.in(roomNo).emit('waiting', {time: 5_000-(Date.now()-activeRooms[roomNo].time), betAmounts:{1:0, 2:0}}); 
             
             
         }
@@ -74,7 +74,7 @@ io.on('connection', (socket)=>{
                 let bidsForPlayer1 = activeRooms[roomNo].bids[0] ? activeRooms[roomNo].bids[0] : [0]; 
                 let bidsForPlayer2 = activeRooms[roomNo].bids[1] ? activeRooms[roomNo].bids[1] : [0]; 
 
-                socket.to(roomNo).emit('waiting', {time: 50_000-(Date.now()-activeRooms[roomNo].time), betAmounts:{1:sum(bidsForPlayer1), 2:sum(bidsForPlayer2)}});
+                socket.to(roomNo).emit('waiting', {time: 5_000-(Date.now()-activeRooms[roomNo].time), betAmounts:{1:sum(bidsForPlayer1), 2:sum(bidsForPlayer2)}});
             }, 1000); 
              
         }); 
